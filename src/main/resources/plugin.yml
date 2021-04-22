@@ -1,0 +1,9 @@
+name: healthkits
+version: ${project.version}
+main: pro.freeserver.plugin.alphakun.healthkits.Healthkits
+api-version: 1.16
+authors: [ Alpha9n ]
+description: This plugin is for adding a medical kit.
+commands:
+  giveheal:
+    description: give medical kit command
