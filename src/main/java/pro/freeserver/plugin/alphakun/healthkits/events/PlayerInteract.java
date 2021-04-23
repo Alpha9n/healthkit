@@ -24,21 +24,27 @@ public class PlayerInteract implements Listener {
             double healValue = MedicalDataGetClass.getHealValue(item);
             String healitemname = MedicalDataGetClass.getHealItemName(item);
             long longusetime = (long) healthKitData.getUsetime();
-            p.setHealth(healValue);
-            healtime(p,longusetime);
+            healtime(p,healValue,longusetime);
             p.sendActionBar("§a§n" + healitemname + "を使用しました。");
             if (debugmessage) {
                 System.out.println(p.getName() + " is now used " + healitemname);
             }
+            minusItemStack(item,1,p);
         }
     }
 
-    private void healtime(Player p,Long delay) {
+    private void healtime(Player p,double healValue,Long delay) {
         new BukkitRunnable() {
             @Override
             public void run() {
+                p.setHealth(healValue);
                 p.playSound(p.getLocation(),healthKitData.getPlaysound(),healthKitData.getSoundvolume(),healthKitData.getSoundpitch());
             }
         }.runTaskLater(plugin,delay);
+    }
+
+    private void minusItemStack(ItemStack item,int minusstack,Player p) {
+        item.setAmount(item.getAmount() - minusstack);
+        p.updateInventory();
     }
 }

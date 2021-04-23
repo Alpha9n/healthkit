@@ -12,7 +12,7 @@ public final class Healthkits extends JavaPlugin {
 
     public static Plugin plugin;
     public static String prefix = "§dHealth §f>> ";
-    public static HealthKitData healthKitData = new HealthKitData("",0.0, 40.0, Sound.ENTITY_SHEEP_SHEAR, 100f, 1.0f);
+    public static HealthKitData healthKitData = new HealthKitData("",0.0, 10.0, Sound.ENTITY_SHEEP_SHEAR, 100f, 1.0f);
     public static Boolean debugmessage = true;
 
     @Override
