@@ -2,10 +2,12 @@ package pro.freeserver.plugin.alphakun.healthkits;
 
 import org.bukkit.Sound;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import pro.freeserver.plugin.alphakun.healthkits.commands.GiveItem;
 import pro.freeserver.plugin.alphakun.healthkits.events.InventoryClick;
 import pro.freeserver.plugin.alphakun.healthkits.events.PlayerInteract;
+import pro.freeserver.plugin.alphakun.healthkits.events.PlayerItemHeld;
 import pro.freeserver.plugin.alphakun.healthkits.healdata.HealthKitData;
 
 public final class Healthkits extends JavaPlugin {
@@ -32,8 +34,10 @@ public final class Healthkits extends JavaPlugin {
     }
 
     private void loadEvents() {
-        getServer().getPluginManager().registerEvents(new InventoryClick(), this);
-        getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
+        PluginManager plm =getServer().getPluginManager();
+        plm.registerEvents(new InventoryClick(), plugin);
+        plm.registerEvents(new PlayerInteract(), plugin);
+        plm.registerEvents(new PlayerItemHeld(), plugin);
     }
 
 }

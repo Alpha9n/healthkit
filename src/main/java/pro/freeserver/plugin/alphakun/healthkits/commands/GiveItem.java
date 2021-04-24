@@ -1,5 +1,6 @@
 package pro.freeserver.plugin.alphakun.healthkits.commands;
 
+import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,11 +18,14 @@ public class GiveItem implements CommandExecutor {
             if (player.isOp()){
                 if (label.equalsIgnoreCase("giveheal")) {
                     if (args.length == 0) {
-                        player.sendMessage(prefix + "§9利用法 \n§f=> §9/giveheal <itemname>");
+                        player.sendMessage(prefix + "§9利用法 \n§f=> §9/giveheal <itemname> <amount>");
                     }
-                    else{
+                    else if(args.length == 2 && NumberUtils.isDigits(args[1])) {
+                        generateItem(args[0],player,Integer.parseInt(args[1]));
+                    }
+                    else {
                         String arg1 = args[0];
-                        generateItem(arg1, player);
+                        generateItem(arg1, player, 1);
                     }
                 }
             }
@@ -29,9 +33,11 @@ public class GiveItem implements CommandExecutor {
         return false;
     }
 
-    private void generateItem(String healitemname, Player player) {
-        if (healitemname.equalsIgnoreCase("ifak")){
-            player.getInventory().addItem(createIFAK());
+    private void generateItem(String healitemname, Player player, int amount) {
+        for (int i = 1; i <= amount; i++){
+            if (healitemname.equalsIgnoreCase("ifak")){
+                player.getInventory().addItem(createIFAK());
+            }
         }
     }
 }

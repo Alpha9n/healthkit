@@ -18,8 +18,8 @@ public class MedicalKit {
         healthKitData.setHealvalue(20.0);
         healthKitData.setPlaysound(Sound.ENTITY_SHEEP_SHEAR);
         healthKitData.setSoundvolume(100.0f);
-        healthKitData.setSoundpitch(0.5f);
-        healthKitData.setUsetime(20.0);
+        healthKitData.setSoundpitch(2f);
+        healthKitData.setUsetime(100.0);
         String data = dataSerialize(healthKitData);
         return setHealthItemData(item,data);
     }

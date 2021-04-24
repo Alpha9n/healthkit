@@ -9,10 +9,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import pro.freeserver.plugin.alphakun.healthkits.healdata.MedicalDataGetClass;
+import pro.freeserver.plugin.alphakun.healthkits.timers.Timer;
 
 import static pro.freeserver.plugin.alphakun.healthkits.Healthkits.*;
+import static pro.freeserver.plugin.alphakun.healthkits.timers.Timer.healtime;
 
 public class PlayerInteract implements Listener {
     @EventHandler
@@ -24,8 +28,9 @@ public class PlayerInteract implements Listener {
             double healValue = MedicalDataGetClass.getHealValue(item);
             String healitemname = MedicalDataGetClass.getHealItemName(item);
             long longusetime = (long) healthKitData.getUsetime();
-            healtime(p,healValue,longusetime);
-            p.sendActionBar("§a§n" + healitemname + "を使用しました。");
+            p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,999999,2,false,false,false));
+            p.getWorld().playSound(p.getLocation(),Sound.ENTITY_BLAZE_SHOOT,1f,2f);
+            healtime(p,healValue,healitemname,longusetime);
             if (debugmessage) {
                 System.out.println(p.getName() + " is now used " + healitemname);
             }
@@ -33,15 +38,7 @@ public class PlayerInteract implements Listener {
         }
     }
 
-    private void healtime(Player p,double healValue,Long delay) {
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                p.setHealth(healValue);
-                p.playSound(p.getLocation(),healthKitData.getPlaysound(),healthKitData.getSoundvolume(),healthKitData.getSoundpitch());
-            }
-        }.runTaskLater(plugin,delay);
-    }
+
 
     private void minusItemStack(ItemStack item,int minusstack,Player p) {
         item.setAmount(item.getAmount() - minusstack);
