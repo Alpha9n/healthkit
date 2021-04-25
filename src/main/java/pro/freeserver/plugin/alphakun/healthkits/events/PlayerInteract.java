@@ -1,7 +1,6 @@
 package pro.freeserver.plugin.alphakun.healthkits.events;
 
 import io.github.bananapuncher714.nbteditor.NBTEditor;
-import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,11 +10,10 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitRunnable;
 import pro.freeserver.plugin.alphakun.healthkits.healdata.MedicalDataGetClass;
-import pro.freeserver.plugin.alphakun.healthkits.timers.Timer;
 
-import static pro.freeserver.plugin.alphakun.healthkits.Healthkits.*;
+import static pro.freeserver.plugin.alphakun.healthkits.Healthkits.debugmessage;
+import static pro.freeserver.plugin.alphakun.healthkits.Healthkits.healthKitData;
 import static pro.freeserver.plugin.alphakun.healthkits.timers.Timer.healtime;
 
 public class PlayerInteract implements Listener {
